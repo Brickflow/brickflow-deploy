@@ -1,0 +1,22 @@
+{
+  "name": "brickflow-deploy",
+  "version": "0.0.0",
+  "description": "Deploy service for Brickflow services.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Brickflow/brickflow-deploy.git"
+  },
+  "author": "Brickflow",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Brickflow/brickflow-deploy/issues"
+  },
+  "homepage": "https://github.com/Brickflow/brickflow-deploy",
+  "devDependencies": {
+    "gulp": "^3.8.9"
+  }
+}
