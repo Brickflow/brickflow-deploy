@@ -20,6 +20,18 @@ var sshTask = new gulpSSH({
   }
 });
 
+var deploy = function(){
+  gulp.start('deploy:'+ instance.name);
+};
+
 gulp.task('deploy:'+ instance.name, function(){
-  return sshTask.exec(['uptime']);
-});
+    var stream = sshTask.exec(['uptime', 'ls -a'],
+      {filePath: 'goro.log'}).
+      pipe(gulp.dest('log'));
+      return stream;
+  }
+);
+
+module.exports = {deploy: deploy};
+
+

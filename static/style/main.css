@@ -1,0 +1,83 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans);
+
+body{
+  margin: 0;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 13px;
+}
+
+.title {
+  text-align: center;
+  color: #655384;
+}
+.instanceWrapper{
+  background-color: #f7f7f7;
+  display: inline-block;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 3px;
+  border: 1px solid #f0f0f0;
+  float:left;
+}
+
+.instanceImage{
+  width: 150px;
+  height: 200px;
+  border-radius: 3px;
+  border: 1px solid #f0f0f0;
+  box-shadow: inset 0px 0px 10px 0px #eeeeee;
+  border-top-right-radius: 0px;
+  border-top-left-radius: 0px;
+}
+
+.instanceImage.goro{
+  background-image: url('../images/characters/goro.jpg') ;
+}
+.instanceImage.sub-zero{
+  background-image: url('../images/characters/sub-zero.jpg') ;
+}
+.instanceImage.sonya-blade{
+  background-image: url('../images/characters/sonya-blade.jpg') ;
+}
+.instanceImage.kitana{
+  background-image: url('../images/characters/kitana.jpg') ;
+}
+.instanceImage.raiden{
+  background-image: url('../images/characters/raiden.jpg') ;
+}
+.instanceImage.cyrax{
+  background-image: url('../images/characters/cyrax.jpg') ;
+}
+.instanceImage.kano{
+  background-image: url('../images/characters/kano.jpg') ;
+}
+
+.instanceName{
+  border-bottom-left-radius: 0px;
+  border-bottol-right-radius: 0px;
+  color: #655384;
+  padding:5px;
+  background-color: #ffffff;
+  border-radius: 3px;
+  border: 1px solid #f0f0f0;
+  box-shadow: inset 0px 0px 10px 0px #eeeeee;
+  text-align: center;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.button{
+  color: #ffffff;
+  padding:5px;
+  background-color: #0088cc;
+  border-radius: 3px;
+  border: 1px solid #f0f0f0;
+  text-align: center;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+.button:hover{
+  box-shadow: inset 0px 0px 10px 0px #ffffff;
+  cursor: pointer;
+  -webkit-user-select: none;
+}

@@ -1,7 +1,7 @@
 'use strict';
 
-var gulp = require('gulp');
+var scriptManager = require('./src/scriptManager');
 
-gulp.task('default', function(){
-
-});
+scriptManager.registerScripts([
+  'goro'
+  ]);

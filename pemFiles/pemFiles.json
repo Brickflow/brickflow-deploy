@@ -1,5 +1,5 @@
 {
-  "goro": "brickflowKey.pem",
-  "sentinel": "brickflowKey.pem",
+  "goro": "brickflow_key.pem",
+  "sentinel": "brickflow_key.pem",
   "faszom": "fing.pem"
 }
