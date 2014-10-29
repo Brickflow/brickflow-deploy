@@ -2,7 +2,7 @@
   "name": "brickflow-deploy",
   "version": "0.0.0",
   "description": "Deploy service for Brickflow services.",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -17,6 +17,12 @@
   },
   "homepage": "https://github.com/Brickflow/brickflow-deploy",
   "devDependencies": {
-    "gulp": "^3.8.9"
+    "gulp": "^3.8.9",
+    "gulp-ssh": "^0.2.2"
+  },
+  "dependencies": {
+    "koa": "^0.13.0",
+    "koa-router": "^3.5.0",
+    "koa-static": "^1.4.7"
   }
 }
