@@ -2,6 +2,4 @@
 
 var scriptManager = require('./src/scriptManager');
 
-scriptManager.registerScripts([
-  'goro'
-  ]);
+scriptManager.registerScripts();
