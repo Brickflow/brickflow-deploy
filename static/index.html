@@ -8,94 +8,159 @@
   <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
   <script src="/js/client.js"></script>
   <h1 class="title">Brickflow Deploy Service</h1>
+
   <div class="instanceWrapper">
-    <div class="instanceName">
-      Goro
+    <div class="instance">
+      <div class="instanceName">
+        Goro
+      </div>
+      <div class="instanceImage goro"></div>
+      <div class="button">Restart</div>
+      <div class="button">Deploy</div>
     </div>
-    <div class="instanceImage goro"></div>
-    <div class="button">Restart</div>
-    <div class="button" onclick="execute('goro','deploy')">Deploy</div>
+    <div class="servicesWrapper">
+      <div class="service">
+        <div class="serviceName">Appserver</div>
+        <div class="button" onclick="execute('goro', 'appServer', 'restart')">Restart</div>
+        <div class="button" onclick="execute('goro', 'appServer', 'deploy')">Deploy</div>
+      </div>
+      <div class="service">
+        <div class="serviceName">Qumblr</div>
+        <div class="button" onclick="execute('goro', 'qumblr', 'restart')">Restart</div>
+        <div class="button" onclick="execute('goro', 'qumblr', 'deploy')">Deploy</div>
+      </div>
+    </div>
   </div>
 
   <div class="instanceWrapper">
-    <div class="instanceName">
-      Sonya-blade
+    <div class="instance">
+      <div class="instanceName">
+        Sub-Zero
+      </div>
+      <div class="instanceImage sub-zero"></div>
+      <div class="button">Restart</div>
+      <div class="button">Deploy</div>
     </div>
-    <div class="instanceImage sonya-blade"></div>
-    <div class="button">Restart</div>
-    <div class="button">Deploy</div>
+    <div class="servicesWrapper">
+      <div class="service">
+        <div class="serviceName">Sentinel</div>
+        <div class="button" onclick="execute('sub-zero', 'sentinel', 'restart')">Restart</div>
+        <div class="button" onclick="execute('sub-zero', 'sentinel', 'deploy')">Deploy</div>
+      </div>
+    </div>
   </div>
 
   <div class="instanceWrapper">
-    <div class="instanceName">
-    Sub-Zero
+    <div class="instance">
+      <div class="instanceName">
+        Cyrax
+      </div>
+      <div class="instanceImage cyrax"></div>
+      <div class="button">Restart</div>
+      <div class="button">Deploy</div>
     </div>
-    <div class="instanceImage sub-zero"></div>
-    <div class="button">Restart</div>
-    <div class="button">Deploy</div>
+    <div class="servicesWrapper">
+      <div class="service">
+        <div class="serviceName">API</div>
+        <div class="button" onclick="execute('cyrax', 'api', 'restart')">Restart</div>
+        <div class="button" onclick="execute('cyrax', 'api', 'deploy')">Deploy</div>
+      </div>
+    </div>
   </div>
 
   <div class="instanceWrapper">
-    <div class="instanceName">
-    Raiden
+    <div class="instance">
+      <div class="instanceName">
+        Raiden
+      </div>
+      <div class="instanceImage raiden"></div>
+      <div class="button">Restart</div>
+      <div class="button">Deploy</div>
     </div>
-    <div class="instanceImage raiden"></div>
-    <div class="button">Restart</div>
-    <div class="button">Deploy</div>
+    <div class="servicesWrapper">
+      <div class="service">
+        <div class="serviceName">Logstash2Influx</div>
+        <div class="button" onclick="execute('raiden', 'logstash2influx', 'restart')">Restart</div>
+        <div class="button" onclick="execute('raiden', 'logstash2influx', 'deploy')">Deploy</div>
+      </div>
+      <div class="service">
+        <div class="serviceName">InfluxDB</div>
+        <div class="button" onclick="execute('raiden', 'influxdb', 'restart')">Restart</div>
+      </div>
+      <div class="service">
+        <div class="serviceName">Logstash</div>
+        <div class="button" onclick="execute('raiden', 'logstash', 'restart')">Restart</div>
+      </div>
+    </div>
   </div>
 
   <div class="instanceWrapper">
-    <div class="instanceName">
-    Kitana
+    <div class="instance">
+      <div class="instanceName">
+        Kano*
+      </div>
+      <div class="instanceImage kano"></div>
+      <div class="button">Restart</div>
+      <div class="button">Deploy</div>
     </div>
-    <div class="instanceImage kitana"></div>
-    <div class="button">Restart</div>
-    <div class="button">Deploy</div>
+    <div class="servicesWrapper">
+      <div class="service">
+        <div class="serviceName">Tumblr-rpc</div>
+        <div class="button" onclick="execute('kano', 'tumblrRpc', 'restart')">Restart</div>
+        <div class="button" onclick="execute('kano', 'tumblrRpc', 'deploy')">Deploy</div>
+      </div>
+    </div>
   </div>
 
   <div class="instanceWrapper">
-    <div class="instanceName">
-    Cyrax
+    <div class="instance">
+      <div class="instanceName">
+        Kitana
+      </div>
+      <div class="instanceImage kitana"></div>
+      <div class="button">Restart</div>
+      <div class="button">Deploy</div>
     </div>
-    <div class="instanceImage cyrax"></div>
-    <div class="button">Restart</div>
-    <div class="button">Deploy</div>
+    <div class="servicesWrapper">
+      <div class="service">
+        <div class="serviceName">RabbitMQ</div>
+        <div class="button" onclick="execute('kitana', 'rabbitmq', 'restart')">Restart</div>
+      </div>
+    </div>
   </div>
 
   <div class="instanceWrapper">
-    <div class="instanceName">
-    Kano 1
+    <div class="instance">
+      <div class="instanceName">
+        Reptile
+      </div>
+      <div class="instanceImage reptile"></div>
+      <div class="button">Restart</div>
+      <div class="button">Deploy</div>
     </div>
-    <div class="instanceImage kano"></div>
-    <div class="button">Restart</div>
-    <div class="button">Deploy</div>
+    <div class="servicesWrapper">
+      <div class="service">
+        <div class="serviceName">Solr</div>
+        <div class="button" onclick="execute('reptile', 'solr', 'restart')">Restart</div>
+      </div>
+    </div>
   </div>
 
   <div class="instanceWrapper">
-    <div class="instanceName">
-    Kano 2
+    <div class="instance">
+      <div class="instanceName">
+        Quan-Chi
+      </div>
+      <div class="instanceImage quan-chi"></div>
+      <div class="button">Restart</div>
+      <div class="button">Deploy</div>
     </div>
-    <div class="instanceImage kano"></div>
-    <div class="button">Restart</div>
-    <div class="button">Deploy</div>
-  </div>
-
-  <div class="instanceWrapper">
-    <div class="instanceName">
-    Kano 3
+    <div class="servicesWrapper">
+      <div class="service">
+        <div class="serviceName">Logstash</div>
+        <div class="button" onclick="execute('quan-chi', 'logstash', 'restart')">Restart</div>
+      </div>
     </div>
-    <div class="instanceImage kano"></div>
-    <div class="button">Restart</div>
-    <div class="button">Deploy</div>
-  </div>
-
-  <div class="instanceWrapper">
-    <div class="instanceName">
-    Kano 4
-    </div>
-    <div class="instanceImage kano"></div>
-    <div class="button">Restart</div>
-    <div class="button">Deploy</div>
   </div>
 </body>
 </html>

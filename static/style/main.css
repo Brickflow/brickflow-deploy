@@ -10,14 +10,25 @@ body{
   text-align: center;
   color: #655384;
 }
+
 .instanceWrapper{
+  margin: 10px;
+  border: 1px solid #f0f0f0;
+  box-shadow: inset 0px 0px 10px 0px #eeeeee;
+  border-radius: 5px;
+  box-sizing:border-box;
+  overflow: hidden;
+}
+
+.instance, .servicesWrapper{
   background-color: #f7f7f7;
   display: inline-block;
   padding: 10px;
   margin: 10px;
   border-radius: 3px;
   border: 1px solid #f0f0f0;
-  float:left;
+  float: left;
+  width: 152px;
 }
 
 .instanceImage{
@@ -51,8 +62,16 @@ body{
 .instanceImage.kano{
   background-image: url('../images/characters/kano.jpg') ;
 }
+.instanceImage.reptile{
+  background-image: url('../images/characters/reptile.jpg') ;
+}
+.instanceImage.quan-chi{
+  background-image: url('../images/characters/quan-chi.gif') ;
+  background-position: center;
+  background-repeat: no-repeat;
+}
 
-.instanceName{
+.instanceName, .serviceName{
   border-bottom-left-radius: 0px;
   border-bottol-right-radius: 0px;
   color: #655384;
@@ -66,6 +85,18 @@ body{
   text-transform: uppercase;
 }
 
+.servicesWrapper{
+  display: block;
+  margin-left: 195px;
+  float: none;
+  width: auto;
+}
+
+.serviceName{
+  display: inline-block;
+  width:150px;
+}
+
 .button{
   color: #ffffff;
   padding:5px;
@@ -75,6 +106,9 @@ body{
   text-align: center;
   font-weight: bold;
   text-transform: uppercase;
+  width: 152px;
+  display: inline-block;
+  box-sizing: border-box;
 }
 .button:hover{
   box-shadow: inset 0px 0px 10px 0px #ffffff;

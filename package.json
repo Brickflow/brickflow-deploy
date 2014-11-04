@@ -18,9 +18,11 @@
   "homepage": "https://github.com/Brickflow/brickflow-deploy",
   "devDependencies": {
     "gulp": "^3.8.9",
+    "gulp-debug": "^1.0.1",
     "gulp-ssh": "^0.2.2"
   },
   "dependencies": {
+    "bl": "^0.9.3",
     "koa": "^0.13.0",
     "koa-router": "^3.5.0",
     "koa-static": "^1.4.7"
