@@ -77,7 +77,7 @@ var deployTumblrRpc = function(streamIn){
 
 var restartTumblrRpc = function(streamIn){
   var combinedStream = require('combined-stream').create({pauseStreams: false});
-  combinedStream.maxDataSize = Infinity;
+
   instances.map(function(instance){
     var tempStream = stream.PassThrough({ objectMode: true });
 
@@ -99,8 +99,9 @@ var restartTumblrRpc = function(streamIn){
     combinedStream.append(tempStream);
   });
   combinedStream.
-    pipe(streamIn).
-    on('error', console.log);
+    on('error', console.log).
+    pipe(streamIn);
+
 
   instances.map(function(instance){
     gulp.start('restart:' + instance.name + ':tumblr-rpc');
