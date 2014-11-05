@@ -86,7 +86,7 @@ var restartLogstash = function(stream){
     serviceName: 'logstash',
     instance: instance,
     command: ['sudo service logstash restart'],
-    stdOutStream: stream,
+    stdOutStream: stream
   });
   gulp.start('restart:'+ instance.name + ':logstash');
 };

@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "bl": "^0.9.3",
+    "combined-stream": "0.0.7",
     "koa": "^0.13.0",
     "koa-router": "^3.5.0",
     "koa-static": "^1.4.7"
