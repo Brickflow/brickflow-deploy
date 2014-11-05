@@ -79,7 +79,7 @@ var restartTumblrRpc = function(streamIn){
   var combinedStream = require('combined-stream').create();
 
   instances.map(function(instance){
-    var tempStream = stream.PassThrough();
+    var tempStream = stream.PassThrough({ objectMode: true });
 
     taskManager.defineTask({
       taskName: 'restart',
