@@ -77,7 +77,7 @@ var deployTumblrRpc = function(streamIn){
 
 var restartTumblrRpc = function(streamIn){
   var combinedStream = require('combined-stream').create();
-
+  combinedStream.maxDataSize = Infinity;
   instances.map(function(instance){
     var tempStream = stream.PassThrough({ objectMode: true });
 
