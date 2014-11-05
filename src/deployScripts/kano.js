@@ -98,7 +98,9 @@ var restartTumblrRpc = function(streamIn){
     });
     combinedStream.append(tempStream);
   });
-  combinedStream.pipe(streamIn);
+  combinedStream.
+    pipe(streamIn).
+    on('error', console.log);
 
   instances.map(function(instance){
     gulp.start('restart:' + instance.name + ':tumblr-rpc');
