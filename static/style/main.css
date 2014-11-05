@@ -115,3 +115,37 @@ body{
   cursor: pointer;
   -webkit-user-select: none;
 }
+
+.hide{
+  display:none;
+}
+
+.terminal{
+  overflow: auto;
+  font-family: 'Consolas';
+  background-color: #000000;
+  color: #00ff00;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  position: fixed;
+  z-index: 1000;
+}
+
+.closeTerminal{
+  margin: 10px;
+  float:right;
+  font-weight: bold;
+  font-size: 15px;
+}
+
+.loading{
+  content: "Working...";
+  background-color: #FFD700;
+   -webkit-animation: colorPulse 1s infinite alternate;
+}
+@-webkit-keyframes colorPulse {
+  0% {background-color: green;}
+  100% {background-color: #FFD700;}
+}

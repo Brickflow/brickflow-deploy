@@ -1,7 +1,7 @@
  'use strict';
 
 var gulp = require('gulp');
-var gulpSSH = require('gulp-ssh');
+var taskManager = require('../taskManager');
 
 var instance = {
   name: 'reptile',
@@ -10,41 +10,77 @@ var instance = {
   pem: require('../getPem').getPem('goro')
 };
 
-var createConnection = function(){
-  return new gulpSSH({
-    ignoreErrors: false,
-    sshConfig: {
-      host: instance.host,
-      port: 22,
-      username: instance.username,
-      privateKey: instance.pem
-    }
-  });
-};
-
 /*
-  InfluxDB: restart
+  Solr: restart
  */
 
-var restartSolr = function(){
+var restartSolr = function(stream){
+  taskManager.defineTask({
+    taskName: 'restart',
+    serviceName: 'solr',
+    instance: instance,
+    command: ['sudo service tomcat7 restart'],
+    stdOutStream: stream,
+  });
   gulp.start('restart:'+ instance.name + ':solr');
 };
-
-gulp.task('restart:'+ instance.name + ':solr', function(){
-  var sshTask = createConnection();
-    return sshTask.exec([
-        'sudo service tomcat7 restart'
-      ],
-      {filePath: 'solr.log'}).
-      on('error', console.log).
-      pipe(gulp.dest('log/'+ instance.name));
-  }
-);
 
 var solr = {
   restart: restartSolr
 };
 
+/*
+  recommend: deploy, restart
+ */
+
+var deployRecommend = function(stream){
+  taskManager.defineTask({
+    taskName: 'deploy',
+    serviceName: 'recommend',
+    instance: instance,
+    command: [
+        'export BF_ENVIRONMENT="PROD"',
+        'cd /home/ubuntu/brickflow-recommend',
+        'git pull origin master 2>&1',
+        'npm install 2>&1',
+        'forever stop /home/ubuntu/brickflow-recommend/src/index.js',
+        'forever start -a ' +
+        '-l /home/ubuntu/brickflow-recommend/log/forever.log ' +
+        '-o /home/ubuntu/brickflow-recommend/log/out.log ' +
+        '-e /home/ubuntu/brickflow-recommend/log/err.log ' +
+        '/home/ubuntu/brickflow-recommend/src/index.js',
+        'forever list'],
+    stdOutStream: stream,
+  });
+  gulp.start('deploy:'+ instance.name + ':recommend');
+};
+
+var restartRecommend = function(stream){
+  taskManager.defineTask({
+    taskName: 'restart',
+    serviceName: 'recommend',
+    instance: instance,
+    command: [
+        'export BF_ENVIRONMENT="PROD"',
+        'cd /home/ubuntu/brickflow-recommend',
+        'forever stop /home/ubuntu/brickflow-recommend/src/index.js',
+        'forever start -a ' +
+        '-l /home/ubuntu/brickflow-recommend/log/forever.log ' +
+        '-o /home/ubuntu/brickflow-recommend/log/out.log ' +
+        '-e /home/ubuntu/brickflow-recommend/log/err.log ' +
+        '/home/ubuntu/brickflow-recommend/src/index.js',
+        'forever list'],
+    stdOutStream: stream,
+  });
+  gulp.start('restart:'+ instance.name + ':recommend');
+};
+
+var recommend = {
+  deploy: deployRecommend,
+  restart: restartRecommend
+};
+
 module.exports = {
-  solr: solr
+  solr: solr,
+  recommend: recommend
 };

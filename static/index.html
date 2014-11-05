@@ -8,7 +8,10 @@
   <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
   <script src="/js/client.js"></script>
   <h1 class="title">Brickflow Deploy Service</h1>
-
+  <div class="terminal hide">
+    <div class="closeTerminal" onclick="hideTerminal()">[X]</div>
+    <div id="terminalContent"></div>
+  </div>
   <div class="instanceWrapper">
     <div class="instance">
       <div class="instanceName">
@@ -21,13 +24,15 @@
     <div class="servicesWrapper">
       <div class="service">
         <div class="serviceName">Appserver</div>
-        <div class="button" onclick="execute('goro', 'appServer', 'restart')">Restart</div>
-        <div class="button" onclick="execute('goro', 'appServer', 'deploy')">Deploy</div>
+        <div class="button" onclick="execute('goro', 'appserver', 'restart', this)">Restart</div>
+        <div class="button" onclick="execute('goro', 'appserver', 'deploy', this)">Deploy</div>
+        <div class="button" onclick="execute('goro', 'appserver', 'test', this)">Test</div>
+
       </div>
       <div class="service">
         <div class="serviceName">Qumblr</div>
-        <div class="button" onclick="execute('goro', 'qumblr', 'restart')">Restart</div>
-        <div class="button" onclick="execute('goro', 'qumblr', 'deploy')">Deploy</div>
+        <div class="button" onclick="execute('goro', 'qumblr', 'restart', this)">Restart</div>
+        <div class="button" onclick="execute('goro', 'qumblr', 'deploy', this)">Deploy</div>
       </div>
     </div>
   </div>
@@ -44,8 +49,8 @@
     <div class="servicesWrapper">
       <div class="service">
         <div class="serviceName">Sentinel</div>
-        <div class="button" onclick="execute('sub-zero', 'sentinel', 'restart')">Restart</div>
-        <div class="button" onclick="execute('sub-zero', 'sentinel', 'deploy')">Deploy</div>
+        <div class="button" onclick="execute('sub-zero', 'sentinel', 'restart', this)">Restart</div>
+        <div class="button" onclick="execute('sub-zero', 'sentinel', 'deploy', this)">Deploy</div>
       </div>
     </div>
   </div>
@@ -62,8 +67,8 @@
     <div class="servicesWrapper">
       <div class="service">
         <div class="serviceName">API</div>
-        <div class="button" onclick="execute('cyrax', 'api', 'restart')">Restart</div>
-        <div class="button" onclick="execute('cyrax', 'api', 'deploy')">Deploy</div>
+        <div class="button" onclick="execute('cyrax', 'api', 'restart', this)">Restart</div>
+        <div class="button" onclick="execute('cyrax', 'api', 'deploy', this)">Deploy</div>
       </div>
     </div>
   </div>
@@ -80,16 +85,16 @@
     <div class="servicesWrapper">
       <div class="service">
         <div class="serviceName">Logstash2Influx</div>
-        <div class="button" onclick="execute('raiden', 'logstash2influx', 'restart')">Restart</div>
-        <div class="button" onclick="execute('raiden', 'logstash2influx', 'deploy')">Deploy</div>
+        <div class="button" onclick="execute('raiden', 'logstash2influx', 'restart', this)">Restart</div>
+        <div class="button" onclick="execute('raiden', 'logstash2influx', 'deploy', this)">Deploy</div>
       </div>
       <div class="service">
         <div class="serviceName">InfluxDB</div>
-        <div class="button" onclick="execute('raiden', 'influxdb', 'restart')">Restart</div>
+        <div class="button" onclick="execute('raiden', 'influxdb', 'restart', this)">Restart</div>
       </div>
       <div class="service">
         <div class="serviceName">Logstash</div>
-        <div class="button" onclick="execute('raiden', 'logstash', 'restart')">Restart</div>
+        <div class="button" onclick="execute('raiden', 'logstash', 'restart', this)">Restart</div>
       </div>
     </div>
   </div>
@@ -106,8 +111,8 @@
     <div class="servicesWrapper">
       <div class="service">
         <div class="serviceName">Tumblr-rpc</div>
-        <div class="button" onclick="execute('kano', 'tumblrRpc', 'restart')">Restart</div>
-        <div class="button" onclick="execute('kano', 'tumblrRpc', 'deploy')">Deploy</div>
+        <div class="button" onclick="execute('kano', 'tumblrRpc', 'restart', this)">Restart</div>
+        <div class="button" onclick="execute('kano', 'tumblrRpc', 'deploy', this)">Deploy</div>
       </div>
     </div>
   </div>
@@ -124,7 +129,8 @@
     <div class="servicesWrapper">
       <div class="service">
         <div class="serviceName">RabbitMQ</div>
-        <div class="button" onclick="execute('kitana', 'rabbitmq', 'restart')">Restart</div>
+        <div class="button" onclick="execute('kitana', 'rabbitmq', 'restart', this)">Restart</div>
+        <div class="button" onclick="execute('kitana', 'rabbitmq', 'check', this)">Check</div>
       </div>
     </div>
   </div>
@@ -141,7 +147,12 @@
     <div class="servicesWrapper">
       <div class="service">
         <div class="serviceName">Solr</div>
-        <div class="button" onclick="execute('reptile', 'solr', 'restart')">Restart</div>
+        <div class="button" onclick="execute('reptile', 'solr', 'restart', this)">Restart</div>
+      </div>
+      <div class="service">
+        <div class="serviceName">Recommend</div>
+        <div class="button" onclick="execute('reptile', 'recommend', 'deploy', this)">Deploy</div>
+        <div class="button" onclick="execute('reptile', 'recommend', 'restart', this)">Restart</div>
       </div>
     </div>
   </div>
@@ -158,7 +169,7 @@
     <div class="servicesWrapper">
       <div class="service">
         <div class="serviceName">Logstash</div>
-        <div class="button" onclick="execute('quan-chi', 'logstash', 'restart')">Restart</div>
+        <div class="button" onclick="execute('quan-chi', 'logstash', 'restart', this)">Restart</div>
       </div>
     </div>
   </div>

@@ -1,7 +1,7 @@
 'use strict';
 
 var gulp = require('gulp');
-var gulpSSH = require('gulp-ssh');
+var taskManager = require('../taskManager');
 
 var instance = {
   name: 'goro',
@@ -10,30 +10,16 @@ var instance = {
   pem: require('../getPem').getPem('goro')
 };
 
-var createConnection = function(){
-  return new gulpSSH({
-    ignoreErrors: false,
-    sshConfig: {
-      host: instance.host,
-      port: 22,
-      username: instance.username,
-      privateKey: instance.pem
-    }
-  });
-};
-
 /*
   AppServer: deploy, restart, test
  */
-var stream = null;
-var deployAppServer = function(sa){
-  stream = sa;
-  gulp.start('deploy:'+ instance.name + ':appserver');
-};
 
-gulp.task('deploy:'+ instance.name + ':appserver', function(){
-  var sshTask = createConnection();
-    return sshTask.exec([
+var deployAppServer = function(stream){
+  taskManager.defineTask({
+    taskName: 'deploy',
+    serviceName: 'appserver',
+    instance: instance,
+    command: [
         'export BF_ENVIRONMENT="PROD"',
         'cd /home/ubuntu/brickflow_app',
         'git pull origin master 2>&1',
@@ -42,54 +28,42 @@ gulp.task('deploy:'+ instance.name + ':appserver', function(){
         'forever start -a -l /home/ubuntu/brickflow_app/log/forever.log ' +
         '-o /home/ubuntu/brickflow_app/log/out.log ' +
         '-e /home/ubuntu/brickflow_app/log/err.log server/src/index.js',
-        'forever list'
-      ].join(' || >&2 echo "Error" && '),
-      {filePath: 'appServer.log'}).
-      pipe(stream).
-      on('error', console.log).
-      pipe(gulp.dest('log/goro'));
-  }
-);
-
-var restartAppServer = function(){
-  gulp.start('restart:'+ instance.name + ':appserver');
+        'forever list'],
+    stdOutStream: stream,
+  });
+  gulp.start('deploy:'+ instance.name + ':appserver');
 };
 
-gulp.task('restart:'+ instance.name + ':appserver', function(){
-    var sshTask = createConnection();
-    return sshTask.exec([
+var restartAppServer = function(stream){
+ taskManager.defineTask({
+    taskName: 'restart',
+    serviceName: 'appserver',
+    instance: instance,
+    command: [
         'export BF_ENVIRONMENT="PROD"',
         'cd /home/ubuntu/brickflow_app',
         'forever stop server/src/index.js',
         'forever start -a -l /home/ubuntu/brickflow_app/log/forever.log ' +
         '-o /home/ubuntu/brickflow_app/log/out.log ' +
         '-e /home/ubuntu/brickflow_app/log/err.log server/src/index.js',
-        'forever list'
-      ].join(' || >&2 echo "Error" && '),
-      {filePath: 'appServer.log'}).
-      on('error', console.log).
-      pipe(gulp.dest('log/goro'));
-  }
-);
+        'forever list'],
+    stdOutStream: stream,
+  });
+  gulp.start('restart:'+ instance.name + ':appserver');
+};
 
-var testAppServer = function(sa){
-  stream = sa;
+var testAppServer = function(stream){
+  taskManager.defineTask({
+    taskName: 'test',
+    serviceName: 'appserver',
+    instance: instance,
+    command: ['date && whoami && uptime && ls -lh'],
+    stdOutStream: stream,
+  });
   gulp.start('test:'+ instance.name + ':appserver');
 };
 
-gulp.task('test:'+ instance.name + ':appserver', function(){
-  var sshTask = createConnection();
-    return sshTask.exec([
-        'uptime && ls -lh'
-      ].join(' || >&2 echo "Error" && '),
-      {filePath: 'appServer.log'}).
-      on('error', console.log).
-      pipe(gulp.dest('log/goro')).
-      pipe(stream);
-  }
-);
-
-var appServer = {
+var appserver = {
   deploy: deployAppServer,
   restart: restartAppServer,
   test: testAppServer
@@ -99,13 +73,12 @@ var appServer = {
   Qumblr: deploy, restart
  */
 
-var deployQumblr = function(){
-  gulp.start('deploy:' + instance.name + ':qumblr');
-};
-
-gulp.task('deploy:'+ instance.name + ':qumblr', function(){
-  var sshTask = createConnection();
-    return sshTask.exec([
+var deployQumblr = function(stream){
+  taskManager.defineTask({
+    taskName: 'deploy',
+    serviceName: 'qumblr',
+    instance: instance,
+    command: [
         'export QUMBLR_ENVIRONMENT="PROD"',
         'cd /home/ubuntu/qumblr.js',
         'git pull origin master 2>&1',
@@ -115,35 +88,29 @@ gulp.task('deploy:'+ instance.name + ':qumblr', function(){
         'forever start -a -l /home/ubuntu/qumblr.js/log/forever.log ' +
         '-o /home/ubuntu/qumblr.js/log/out.log ' +
         '-e /home/ubuntu/qumblr.js/log/err.log run.js',
-        'forever list'
-      ].join(' || >&2 echo "Error" && '),
-      {filePath: 'qumblr.log'}).
-      on('error', console.log).
-      pipe(gulp.dest('log/goro')).
-      pipe(stream);
-  }
-);
-
-var restartQumblr = function(){
-  gulp.start('restart:' + instance.name + ':qumblr');
+        'forever list'],
+    stdOutStream: stream,
+  });
+  gulp.start('deploy:' + instance.name + ':qumblr');
 };
 
-gulp.task('restart:'+ instance.name + ':qumblr', function(){
-  var sshTask = createConnection();
-    return sshTask.exec([
+var restartQumblr = function(stream){
+  taskManager.defineTask({
+    taskName: 'restart',
+    serviceName: 'qumblr',
+    instance: instance,
+    command: [
         'export QUMBLR_ENVIRONMENT="PROD"',
         'cd /home/ubuntu/qumblr.js',
         'forever stop run.js',
         'forever start -a -l /home/ubuntu/qumblr.js/log/forever.log ' +
         '-o /home/ubuntu/qumblr.js/log/out.log ' +
         '-e /home/ubuntu/qumblr.js/log/err.log run.js',
-        'forever list'
-      ].join(' || >&2 echo "Error" && '),
-      {filePath: 'qumblr.log'}).
-      on('error', console.log).
-      pipe(gulp.dest('log/goro'));
-  }
-);
+        'forever list'],
+    stdOutStream: stream,
+  });
+  gulp.start('restart:' + instance.name + ':qumblr');
+};
 
 var qumblr = {
   deploy: deployQumblr,
@@ -151,6 +118,6 @@ var qumblr = {
 };
 
 
-module.exports = {appServer: appServer, qumblr: qumblr};
+module.exports = {appserver: appserver, qumblr: qumblr};
 
 

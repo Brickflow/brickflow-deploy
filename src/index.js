@@ -5,27 +5,38 @@ var router = require('koa-router');
 var serve = require('koa-static');
 var stream = require('stream');
 var app = koa();
-var bl = require('bl');
 
 app.use(router(app));
 app.use(serve(__dirname + '/../static'));
 
-app.get('/execute/:server/:service/:action', function *(next){
-  this.type = 'json';
-  var s = this.body = stream.Transform({ objectMode: true });
-  s._transform = function(a, b, next) {
-    var s2 = stream.Transform({ objectMode: true });
-    var that = this;
-    s2._transform = function(a, b, next) {
-      that.push(a.toString());
-      next();
-    };
-    a.pipe(s2);
-    s2.read();
+function getFileStream(cb) {
+  var fileStream = stream.Transform({ objectMode: true });
+  fileStream._transform = function(chunk, enc, next) {
+    cb(null, chunk.toString());
     next();
   };
+  return fileStream;
+}
+
+function getStdOutStream() {
+  var s = stream.Transform({ objectMode: true });
+  s._transform = function(chunk, enc, next) {
+    var fileStream = getFileStream((function(err, file) {
+      this.push(file);
+      next();
+    }).bind(this));
+    chunk.pipe(fileStream);
+    fileStream.read();
+  };
+  return s;
+}
+
+app.get('/execute/:server/:service/:action', function *(next){
+  this.type = 'json';
+  var stdOutStream = getStdOutStream();
+  this.body = stdOutStream;
   require('./deployScripts/' + this.params.server)
-    [this.params.service][this.params.action](s);
+    [this.params.service][this.params.action](stdOutStream);
   yield next;
 });
 
