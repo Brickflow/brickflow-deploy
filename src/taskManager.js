@@ -4,6 +4,7 @@ var gulp = require('gulp');
 var gulpSSH = require('gulp-ssh');
 
 var createConnection = function(instance){
+  console.log('szopdleamitbasztam');
   return new gulpSSH({
     ignoreErrors: false,
     sshConfig: {
