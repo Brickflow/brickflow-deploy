@@ -10,8 +10,8 @@ var instances = [
     host: '172.30.1.146', // VPC IP
     username: 'ubuntu',
     pem: require('../getPem').getPem('goro')
-  },
-  {
+  }
+  /*{
     name: 'kano2',
     host: '172.30.1.167', // VPC IP
     username: 'ubuntu',
@@ -40,7 +40,7 @@ var instances = [
     host: '172.30.1.225', // VPC IP
     username: 'ubuntu',
     pem: require('../getPem').getPem('goro')
-  }
+  }*/
 ];
 
 /*
