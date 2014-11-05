@@ -98,7 +98,9 @@ var restartTumblrRpc = function(streamIn){
       stdOutStream: tempStream,
     });
     //combinedStream.append(tempStream);
-    tempStream.pipe(streamIn);
+    tempStream.pipe(bigStream).on('end', function(d){
+      console.log('EEEEEEEEEEEND',d);
+    });
   });
   /*combinedStream.
     on('error', console.log).
