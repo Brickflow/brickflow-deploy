@@ -75,8 +75,12 @@ var deployTumblrRpc = function(streamIn){
   combinedStream.pipe(streamIn);
 };
 
-var restartTumblrRpc = function(stream){
+var restartTumblrRpc = function(streamIn){
+  var combinedStream = require('combined-stream').create();
+
   instances.map(function(instance){
+    var tempStream = stream.PassThrough();
+
     taskManager.defineTask({
       taskName: 'restart',
       serviceName: 'tumblr-rpc',
@@ -90,10 +94,12 @@ var restartTumblrRpc = function(stream){
           '-e /home/ubuntu/brickflow-tumblr-rpc/log/err.log ' +
           '/home/ubuntu/brickflow-tumblr-rpc/run.js',
           'forever list'],
-      stdOutStream: stream,
+      stdOutStream: tempStream,
     });
+    combinedStream.append(tempStream);
     gulp.start('restart:' + instance.name + ':tumblr-rpc');
   });
+  combinedStream.pipe(streamIn);
 };
 
 var tumblrRpc = {
