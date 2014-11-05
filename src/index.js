@@ -37,6 +37,9 @@ app.get('/execute/:server/:service/:action', function *(next){
   this.body = stdOutStream;
   require('./deployScripts/' + this.params.server)
     [this.params.service][this.params.action](stdOutStream);
+    stdOutStream.on('end', function(){
+      console.log('stdoutstream ended');
+    });
   yield next;
 });
 
