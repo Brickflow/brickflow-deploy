@@ -106,12 +106,14 @@ var restartTumblrRpc = function(streamIn){
     on('error', console.log).
     pipe(streamIn);
 */
-    bigStream.pipe(streamIn).on('end', function(d){
-      console.log('bigeeeeend',d);
-    });
+  bigStream.pipe(streamIn).on('end', function(d){
+    console.log('bigeeeeend',d);
+  });
 
 
   instances.map(function(instance){
+  console.log('############elinditok egy taszkot' + instance.name);
+
     gulp.start('restart:' + instance.name + ':tumblr-rpc');
   });
 };
