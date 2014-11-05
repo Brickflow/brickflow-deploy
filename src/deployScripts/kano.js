@@ -106,7 +106,9 @@ var restartTumblrRpc = function(streamIn){
     on('error', console.log).
     pipe(streamIn);
 */
-    bigStream.pipe(streamIn);
+    bigStream.pipe(streamIn).on('end', function(d){
+      console.log('bigeeeeend',d);
+    });
 
 
   instances.map(function(instance){
