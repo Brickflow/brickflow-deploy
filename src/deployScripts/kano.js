@@ -97,9 +97,12 @@ var restartTumblrRpc = function(streamIn){
       stdOutStream: tempStream,
     });
     combinedStream.append(tempStream);
-    gulp.start('restart:' + instance.name + ':tumblr-rpc');
   });
   combinedStream.pipe(streamIn);
+
+  instances.map(function(instance){
+    gulp.start('restart:' + instance.name + ':tumblr-rpc');
+  });
 };
 
 var tumblrRpc = {
