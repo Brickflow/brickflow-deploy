@@ -16,7 +16,7 @@ var instances = [
     host: '172.30.1.167', // VPC IP
     username: 'ubuntu',
     pem: require('../getPem').getPem('goro')
-  }/*,
+  },
   {
     name: 'kano3',
     host: '172.30.1.227', // VPC IP
@@ -40,7 +40,7 @@ var instances = [
     host: '172.30.1.225', // VPC IP
     username: 'ubuntu',
     pem: require('../getPem').getPem('goro')
-  }*/
+  }
 ];
 
 /*
@@ -111,11 +111,12 @@ var restartTumblrRpc = function(streamIn){
   });
 
 
-  instances.map(function(instance){
+ /* instances.map(function(instance){
   console.log('############elinditok egy taszkot' + instance.name);
 
     gulp.start('restart:' + instance.name + ':tumblr-rpc');
-  });
+  });*/
+  gulp.start('restart:kano1:tumblr-rpc');
 };
 
 var tumblrRpc = {
