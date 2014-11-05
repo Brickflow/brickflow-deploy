@@ -17,6 +17,7 @@ var createConnection = function(instance){
 };
 
 function defineTask(options) {
+  console.log('############definialok egy taszkot' + options.instance.name);
   gulp.task(options.taskName + ':' +
       options.instance.name + ':' +
       options.serviceName,
