@@ -4,7 +4,6 @@ var gulp = require('gulp');
 var gulpSSH = require('gulp-ssh');
 
 var createConnection = function(instance){
-  console.log('szopdleamitbasztam');
   return new gulpSSH({
     ignoreErrors: false,
     sshConfig: {
@@ -17,7 +16,6 @@ var createConnection = function(instance){
 };
 
 function defineTask(options) {
-  console.log('############definialok egy taszkot' + options.instance.name);
   gulp.task(options.taskName + ':' +
       options.instance.name + ':' +
       options.serviceName,
@@ -27,7 +25,7 @@ function defineTask(options) {
           options.command.join(' || >&2 echo "Error" && '),
           {filePath: options.serviceName + '.log'}).
           on('error', console.log).
-          pipe(gulp.dest('log/' + options.instance.name)).
+          pipe(gulp.dest(__dirname + '/../log/' + options.instance.name)).
           pipe(options.stdOutStream);
       }
   );

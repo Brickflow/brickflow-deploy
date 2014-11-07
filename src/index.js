@@ -45,4 +45,4 @@ app.get('/execute/:server/:service/:action', function *(next){
 
 app.listen(3000);
 
-console.log('listening on your mother\'s ass ',__dirname+'\\static');
+console.log('Deploy service started in dir ', __dirname);
