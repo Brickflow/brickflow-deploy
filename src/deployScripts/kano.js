@@ -75,11 +75,10 @@ var deployTumblrRpc = function(streamIn){
   });
   combinedStream.pipe(streamIn);
 };
-//https://www.npmjs.org/package/run-sequence
+
 var restartTumblrRpc = function(streamIn){
-  //var combinedStream = require('combined-stream').create({pauseStreams: false});
-  //combinedStream.maxDataSize = 1024 * 1024 * 1024;
   var bigStream = stream.PassThrough({ objectMode: true });
+
   instances.map(function(instance){
     var tempStream = stream.PassThrough({ objectMode: true });
 
@@ -98,25 +97,12 @@ var restartTumblrRpc = function(streamIn){
           'forever list'],
       stdOutStream: tempStream,
     });
-    //combinedStream.append(tempStream);
-    tempStream.pipe(bigStream).on('end', function(d){
-      console.log('EEEEEEEEEEEND',d);
-    });
-  });
-  /*combinedStream.
-    on('error', console.log).
-    pipe(streamIn);
-*/
-  bigStream.pipe(streamIn).on('end', function(d){
-    console.log('bigeeeeend',d);
+
+    tempStream.pipe(bigStream);
   });
 
+  bigStream.pipe(streamIn);
 
- /* instances.map(function(instance){
-  console.log('############elinditok egy taszkot' + instance.name);
-
-    gulp.start('restart:' + instance.name + ':tumblr-rpc');
-  });*/
   gulp.task('restart:kano:tumblr-rpc', function(callback){
     runSequence(
       'restart:kano1:tumblr-rpc',
