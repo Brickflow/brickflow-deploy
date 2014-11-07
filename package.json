@@ -19,7 +19,8 @@
   "devDependencies": {
     "gulp": "^3.8.9",
     "gulp-debug": "^1.0.1",
-    "gulp-ssh": "^0.2.2"
+    "gulp-ssh": "^0.2.2",
+    "run-sequence": "^1.0.1"
   },
   "dependencies": {
     "bl": "^0.9.3",

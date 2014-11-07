@@ -1,6 +1,7 @@
 'use strict';
 
 var gulp = require('gulp');
+var runSequence = require('run-sequence');
 var taskManager = require('../taskManager');
 var stream = require('stream');
 
@@ -74,7 +75,7 @@ var deployTumblrRpc = function(streamIn){
   });
   combinedStream.pipe(streamIn);
 };
-
+//https://www.npmjs.org/package/run-sequence
 var restartTumblrRpc = function(streamIn){
   //var combinedStream = require('combined-stream').create({pauseStreams: false});
   //combinedStream.maxDataSize = 1024 * 1024 * 1024;
@@ -116,7 +117,19 @@ var restartTumblrRpc = function(streamIn){
 
     gulp.start('restart:' + instance.name + ':tumblr-rpc');
   });*/
-  gulp.start('restart:kano1:tumblr-rpc');
+  gulp.task('restart:kano:tumblr-rpc', function(callback){
+    runSequence(
+      'restart:kano1:tumblr-rpc',
+      'restart:kano2:tumblr-rpc',
+      'restart:kano3:tumblr-rpc',
+      'restart:kano4:tumblr-rpc',
+      'restart:kano5:tumblr-rpc',
+      'restart:kano6:tumblr-rpc',
+      callback
+    );
+  });
+
+  gulp.start('restart:kano:tumblr-rpc');
 };
 
 var tumblrRpc = {
