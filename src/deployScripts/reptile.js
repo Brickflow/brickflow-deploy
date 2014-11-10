@@ -44,7 +44,7 @@ var deployRecommend = function(stream){
         'git pull origin master 2>&1',
         'npm install 2>&1',
         'forever stop /home/ubuntu/brickflow-recommend/src/index.js',
-        'forever start -a ' +
+        'forever start -c "node --harmony" -a ' +
         '-l /home/ubuntu/brickflow-recommend/log/forever.log ' +
         '-o /home/ubuntu/brickflow-recommend/log/out.log ' +
         '-e /home/ubuntu/brickflow-recommend/log/err.log ' +
@@ -64,7 +64,7 @@ var restartRecommend = function(stream){
         'export BF_ENVIRONMENT="PROD"',
         'cd /home/ubuntu/brickflow-recommend',
         'forever stop /home/ubuntu/brickflow-recommend/src/index.js',
-        'forever start -a ' +
+        'forever start -c "node --harmony" -a ' +
         '-l /home/ubuntu/brickflow-recommend/log/forever.log ' +
         '-o /home/ubuntu/brickflow-recommend/log/out.log ' +
         '-e /home/ubuntu/brickflow-recommend/log/err.log ' +
