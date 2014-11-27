@@ -94,8 +94,9 @@ var restartQumblr = function(stream){
     serviceName: 'qumblr',
     instance: instance,
     command: [
+        'export BF_ENVIRONMENT="PROD"',
         'export QUMBLR_ENVIRONMENT="PROD"',
-        'cd /home/ubuntu/qumblr.js',
+        'cd /home/ubuntu/brickflow-qumblr',
         'forever stop run.js',
         'forever start --silent -a -l /dev/null run.js',
         'forever list'],
