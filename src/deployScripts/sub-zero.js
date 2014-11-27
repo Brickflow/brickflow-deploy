@@ -24,7 +24,7 @@ var deploySentinel = function(stream){
         'git pull origin master 2>&1',
         'npm install 2>&1',
         'forever stop /var/www/sentinel.brickflow.com/src/index.js',
-        'forever start --silent -l /dev/null ' +
+        'forever start --silent -a -l /dev/null ' +
           '/var/www/sentinel.brickflow.com/src/index.js',
         'forever list'],
     stdOutStream: stream,
@@ -40,7 +40,7 @@ var restartSentinel = function(stream){
     command: [
          'cd /var/www/sentinel.brickflow.com/',
         'forever stop /var/www/sentinel.brickflow.com/src/index.js',
-        'forever start --silent -l /dev/null ' +
+        'forever start --silent -a -l /dev/null ' +
           '/var/www/sentinel.brickflow.com/src/index.js',
         'forever list'],
     stdOutStream: stream,

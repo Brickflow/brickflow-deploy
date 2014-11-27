@@ -24,7 +24,7 @@ var deployLogstash2Influx = function(stream){
         'git pull origin master 2>&1',
         'npm install 2>&1',
         'forever stop /home/ubuntu/brickflow-logstash2influx/run.js',
-        'forever start --silent -l /dev/null ' +
+        'forever start --silent -a -l /dev/null ' +
           '/home/ubuntu/brickflow-logstash2influx/run.js',
         'forever list'],
     stdOutStream: stream,
@@ -40,7 +40,7 @@ var restartLogstash2Influx = function(stream){
     command: [
         'cd /home/ubuntu/brickflow-logstash2influx',
         'forever stop /home/ubuntu/brickflow-logstash2influx/run.js',
-        'forever start --silent -l /dev/null ' +
+        'forever start --silent -a -l /dev/null ' +
           '/home/ubuntu/brickflow-logstash2influx/run.js',
         'forever list'],
     stdOutStream: stream,

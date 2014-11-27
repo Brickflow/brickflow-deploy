@@ -62,7 +62,7 @@ var deployTumblrRpc = function(streamIn){
           'git pull origin master 2>&1',
           'npm install 2>&1',
           'forever stop /home/ubuntu/brickflow-tumblr-rpc/run.js',
-          'forever start --silent -l /dev/null ' +
+          'forever start --silent -a -l /dev/null ' +
             '/home/ubuntu/brickflow-tumblr-rpc/run.js',
           'forever list'],
       stdOutStream: tempStream
@@ -86,7 +86,7 @@ var restartTumblrRpc = function(streamIn){
       command: [
           'cd /home/ubuntu/brickflow-tumblr-rpc',
           'forever stop /home/ubuntu/brickflow-tumblr-rpc/run.js',
-          'forever start --silent -l /dev/null ' +
+          'forever start --silent -a -l /dev/null ' +
             '/home/ubuntu/brickflow-tumblr-rpc/run.js',
           'forever list'],
       stdOutStream: tempStream
