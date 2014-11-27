@@ -25,9 +25,7 @@ var deployAppServer = function(stream){
         'git pull origin master 2>&1',
         'npm install 2>&1',
         'forever stop server/src/index.js',
-        'forever start -a -l /home/ubuntu/brickflow_app/log/forever.log ' +
-        '-o /home/ubuntu/brickflow_app/log/out.log ' +
-        '-e /home/ubuntu/brickflow_app/log/err.log server/src/index.js',
+        'forever start --silent server/src/index.js',
         'forever list'],
     stdOutStream: stream,
   });
@@ -43,9 +41,7 @@ var restartAppServer = function(stream){
         'export BF_ENVIRONMENT="PROD"',
         'cd /home/ubuntu/brickflow_app',
         'forever stop server/src/index.js',
-        'forever start -a -l /home/ubuntu/brickflow_app/log/forever.log ' +
-        '-o /home/ubuntu/brickflow_app/log/out.log ' +
-        '-e /home/ubuntu/brickflow_app/log/err.log server/src/index.js',
+        'forever start --silent server/src/index.js',
         'forever list'],
     stdOutStream: stream,
   });
@@ -85,9 +81,7 @@ var deployQumblr = function(stream){
         'npm install 2>&1',
         'grunt setup',
         'forever stop run.js',
-        'forever start -a -l /home/ubuntu/qumblr.js/log/forever.log ' +
-        '-o /home/ubuntu/qumblr.js/log/out.log ' +
-        '-e /home/ubuntu/qumblr.js/log/err.log run.js',
+        'forever start --silent run.js',
         'forever list'],
     stdOutStream: stream,
   });
@@ -103,9 +97,7 @@ var restartQumblr = function(stream){
         'export QUMBLR_ENVIRONMENT="PROD"',
         'cd /home/ubuntu/qumblr.js',
         'forever stop run.js',
-        'forever start -a -l /home/ubuntu/qumblr.js/log/forever.log ' +
-        '-o /home/ubuntu/qumblr.js/log/out.log ' +
-        '-e /home/ubuntu/qumblr.js/log/err.log run.js',
+        'forever start --silent run.js',
         'forever list'],
     stdOutStream: stream,
   });

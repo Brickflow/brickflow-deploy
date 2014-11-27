@@ -25,11 +25,8 @@ var deployAPI = function(stream){
         'git pull origin master 2>&1',
         'npm install 2>&1',
         'forever stop /home/ubuntu/brickflow-api/src/index.js',
-        'forever start -c "node --harmony" -a ' +
-        '-l /home/ubuntu/brickflow-api/log/forever.log ' +
-        '-o /home/ubuntu/brickflow-api/log/out.log ' +
-        '-e /home/ubuntu/brickflow-api/log/err.log ' +
-        '/home/ubuntu/brickflow-api/src/index.js',
+        'forever start -c "node --harmony" --silent ' +
+          '/home/ubuntu/brickflow-api/src/index.js',
         'forever list'],
     stdOutStream: stream,
   });
@@ -45,11 +42,8 @@ var restartAPI = function(stream){
         'export BF_ENVIRONMENT="PROD"',
         'cd /home/ubuntu/brickflow-api',
         'forever stop /home/ubuntu/brickflow-api/src/index.js',
-        'forever start -c "node --harmony" -a ' +
-        '-l /home/ubuntu/brickflow-api/log/forever.log ' +
-        '-o /home/ubuntu/brickflow-api/log/out.log ' +
-        '-e /home/ubuntu/brickflow-api/log/err.log ' +
-        '/home/ubuntu/brickflow-api/src/index.js',
+        'forever start -c "node --harmony" --silent ' +
+          '/home/ubuntu/brickflow-api/src/index.js',
         'forever list'],
     stdOutStream: stream,
   });

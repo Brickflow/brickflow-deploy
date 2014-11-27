@@ -24,10 +24,7 @@ var deploySentinel = function(stream){
         'git pull origin master 2>&1',
         'npm install 2>&1',
         'forever stop /var/www/sentinel.brickflow.com/src/index.js',
-        'forever start -a -l /var/www/sentinel.brickflow.com/log/forever.log ' +
-        '-o /var/www/sentinel.brickflow.com/log/out.log ' +
-        '-e /var/www/sentinel.brickflow.com/log/err.log ' +
-        '/var/www/sentinel.brickflow.com/src/index.js',
+        'forever start --silent /var/www/sentinel.brickflow.com/src/index.js',
         'forever list'],
     stdOutStream: stream,
   });
@@ -42,10 +39,7 @@ var restartSentinel = function(stream){
     command: [
          'cd /var/www/sentinel.brickflow.com/',
         'forever stop /var/www/sentinel.brickflow.com/src/index.js',
-        'forever start -a -l /var/www/sentinel.brickflow.com/log/forever.log ' +
-        '-o /var/www/sentinel.brickflow.com/log/out.log ' +
-        '-e /var/www/sentinel.brickflow.com/log/err.log ' +
-        '/var/www/sentinel.brickflow.com/src/index.js',
+        'forever start --silent /var/www/sentinel.brickflow.com/src/index.js',
         'forever list'],
     stdOutStream: stream,
   });

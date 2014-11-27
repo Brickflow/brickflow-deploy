@@ -62,11 +62,7 @@ var deployTumblrRpc = function(streamIn){
           'git pull origin master 2>&1',
           'npm install 2>&1',
           'forever stop /home/ubuntu/brickflow-tumblr-rpc/run.js',
-          'forever start -a ' +
-          '-l /home/ubuntu/brickflow-tumblr-rpc/log/forever.log ' +
-          '-o /home/ubuntu/brickflow-tumblr-rpc/log/out.log ' +
-          '-e /home/ubuntu/brickflow-tumblr-rpc/log/err.log ' +
-          '/home/ubuntu/brickflow-tumblr-rpc/run.js',
+          'forever start --silent /home/ubuntu/brickflow-tumblr-rpc/run.js',
           'forever list'],
       stdOutStream: tempStream
     });
@@ -89,13 +85,9 @@ var restartTumblrRpc = function(streamIn){
       command: [
           'cd /home/ubuntu/brickflow-tumblr-rpc',
           'forever stop /home/ubuntu/brickflow-tumblr-rpc/run.js',
-          'forever start -a ' +
-          '-l /home/ubuntu/brickflow-tumblr-rpc/log/forever.log ' +
-          '-o /home/ubuntu/brickflow-tumblr-rpc/log/out.log ' +
-          '-e /home/ubuntu/brickflow-tumblr-rpc/log/err.log ' +
-          '/home/ubuntu/brickflow-tumblr-rpc/run.js',
+          'forever start --silent /home/ubuntu/brickflow-tumblr-rpc/run.js',
           'forever list'],
-      stdOutStream: tempStream,
+      stdOutStream: tempStream
     });
 
     tempStream.pipe(bigStream);
