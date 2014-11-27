@@ -5,7 +5,8 @@ var taskManager = require('../taskManager');
 
 var instance = {
   name: 'reptile',
-  host: 'reptile.brickflow.com', // VPC IP
+//  host: 'reptile.brickflow.com', // VPC IP
+  host: 'ec2-54-173-155-221.compute-1.amazonaws.com',
   username: 'ubuntu',
   pem: require('../getPem').getPem('goro')
 };
