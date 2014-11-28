@@ -23,6 +23,7 @@
     "run-sequence": "^1.0.1"
   },
   "dependencies": {
+    "ansi2html": "0.0.1",
     "bl": "^0.9.3",
     "combined-stream": "0.0.7",
     "koa": "^0.13.0",

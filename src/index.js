@@ -4,6 +4,7 @@ var koa = require('koa');
 var router = require('koa-router');
 var serve = require('koa-static');
 var stream = require('stream');
+var ansi2html = require('ansi2html');
 var app = koa();
 
 app.use(router(app));
@@ -12,7 +13,7 @@ app.use(serve(__dirname + '/../static'));
 function getFileStream(cb) {
   var fileStream = stream.Transform({ objectMode: true });
   fileStream._transform = function(chunk, enc, next) {
-    cb(null, chunk.toString());
+    cb(null, ansi2html(chunk.toString()));
     next();
   };
   return fileStream;
